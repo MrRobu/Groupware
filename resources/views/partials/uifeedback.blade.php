@@ -1,0 +1,1 @@
+{!! \TsfCorp\UiFeedback\Facades\UiFeedback::get() !!}
