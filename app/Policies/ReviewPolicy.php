@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\User;
 use App\Models\Review;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Models\Post;
 
 class ReviewPolicy
 {
@@ -30,7 +31,7 @@ class ReviewPolicy
      */
     public function create(User $user)
     {
-        return true;
+        return (bool)Post::unratedBy($user)->count();
     }
 
     /**
