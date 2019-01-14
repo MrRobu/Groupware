@@ -35,7 +35,7 @@ class PostPolicy
      */
     public function create(User $user)
     {
-        return (bool)Post::unratedBy($user)->count();
+        return true;
     }
 
     public function attachReview(User $user, Post $post)
