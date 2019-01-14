@@ -70,59 +70,61 @@
                 </div>
             </div>
             @if($profile->posts->count())
-                <table class="table">
-                    <thead class="thead-light">
-                        <tr>
-                            <th scope="col" class="text-center" style="width: 100px">
-                                ID
-                            </th>
-                            <th scope="col">
-                                Title
-                            </th>
-                            <th scope="col" class="text-center">
-                                Published at
-                            </th>
-                            <th scope="col" class="text-center" width="180">
-                                Actions
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($profile->posts as $post)
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="thead-light">
                             <tr>
-                                <th scope="row" class="text-center align-middle">
-                                    {{ $post->id }}
+                                <th scope="col" class="text-center" style="width: 100px">
+                                    ID
                                 </th>
-                                <td style="vertical-align:middle">
-                                    {{ $post->title }}
-                                </td>
-                                <td class="text-center align-middle">
-                                    @if($post->published_at)
-                                        {{ $post->published_at->toDayDateTimeString() }}
-                                    @else
-                                        <i class="text-muted">Unpublished</i>
-                                    @endif
-                                </td>
-                                <td class="text-center align-middle">
-                                    <a class="btn btn-sm btn-link" href="{{ URL::to('posts/' . $post->id) }}" title="Show post">
-                                        <i class="fa fa-2x fa-eye"></i>
-                                    </a>
-                                    <a class="btn btn-sm btn-link" href="{{ URL::to('posts/' . $post->id . '/edit') }}" title="Edit post">
-                                        <i class="fa fa-2x fa-edit"></i>
-                                    </a>
-                                    <button type="submit" class="btn btn-sm btn-link" title="Delete post" data-toggle="modal" data-target="#delete_modal" data-action="{{ URL::to('posts/' . $post->id) }}">
-                                        <i class="fa fa-2x fa-trash-o"></i>
-                                    </button>
-                                </td>
+                                <th scope="col">
+                                    Title
+                                </th>
+                                <th scope="col" class="text-center">
+                                    Published at
+                                </th>
+                                <th scope="col" class="text-center" width="180">
+                                    Actions
+                                </th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach ($profile->posts as $post)
+                                <tr>
+                                    <th scope="row" class="text-center align-middle">
+                                        {{ $post->id }}
+                                    </th>
+                                    <td style="vertical-align:middle">
+                                        {{ $post->title }}
+                                    </td>
+                                    <td class="text-center align-middle">
+                                        @if($post->published_at)
+                                            {{ $post->published_at->toDayDateTimeString() }}
+                                        @else
+                                            <i class="text-muted">Unpublished</i>
+                                        @endif
+                                    </td>
+                                    <td class="text-center align-middle">
+                                        <a class="btn btn-sm btn-link" href="{{ URL::to('posts/' . $post->id) }}" title="Show post">
+                                            <i class="fa fa-2x fa-eye"></i>
+                                        </a>
+                                        <a class="btn btn-sm btn-link" href="{{ URL::to('posts/' . $post->id . '/edit') }}" title="Edit post">
+                                            <i class="fa fa-2x fa-edit"></i>
+                                        </a>
+                                        <button type="submit" class="btn btn-sm btn-link" title="Delete post" data-toggle="modal" data-target="#delete_modal" data-action="{{ URL::to('posts/' . $post->id) }}">
+                                            <i class="fa fa-2x fa-trash-o"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             @else
                 <div class="d-flex flex-column align-items-center justify-content-center text-muted py-3">
                     <i class="fa fa-5x fa-table"></i>
                     <h6 class="card-title">
-                        No records matched the given criteria
+                        No records found
                     </h6>
                     <a href="{{ URL::to('posts/create?user_id=' . $profile->id) }}">
                         <button class="btn btn-sm btn-outline-primary">Create Post</button>
@@ -213,7 +215,7 @@
                 <div class="d-flex flex-column align-items-center justify-content-center text-muted py-3">
                     <i class="fa fa-5x fa-table"></i>
                     <h6 class="card-title">
-                        No records matched the given criteria
+                        No records found
                     </h6>
                     @can('attach-review', $profile)
                         <a href="{{ URL::to('reviews/create') }}">
